@@ -1,4 +1,6 @@
-git bash alias
+## git bash alias
+
+配置文件~/.bash_profile
 
 ``` shell
 alias ga='git add -A'
