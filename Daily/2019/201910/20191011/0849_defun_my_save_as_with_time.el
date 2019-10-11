@@ -8,9 +8,10 @@
 		 (now-save-file-name (if (string-blank-p current-line-string)
 							(format "%s_%s.%s" (format-time-string "%H%M") (format-time-string "%S%3N") file-extention)
 							(format "%s_%s.%s" (format-time-string "%H%M") replace-this-line file-extention)))
-		 (now-save-full-name (concat (file-name-as-directory default-directory) now-save-file-name)))
-	(write-file now-save-full-name)
-	(message (format "File save as [%s]" now-save-full-name))))
+		 (now-save-full-name (concat (file-name-as-directory default-directory) now-save-file-name))
+		 (now-modified-full-name (read-file-name "Write file: " now-save-full-name)))
+	(write-file now-modified-full-name)
+	(message (format "File save as [%s]" now-modified-full-name))))
 
 
 (defun my-save-buffer-to-today-work(user-input)
