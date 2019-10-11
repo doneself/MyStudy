@@ -1,1 +1,1 @@
-## Study SomeThine
+## Study SomeThing
