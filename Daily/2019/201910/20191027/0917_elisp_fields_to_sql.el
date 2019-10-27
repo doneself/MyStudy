@@ -1,7 +1,7 @@
 ;;elisp fields to sql
 
 (defun fields-to-insert-sql (select-symbol)
-  (interactive (list (completing-read "select:" (list ":" "@"))))
+  (interactive (list (completing-read "Select symbol:" (list ":" "@"))))
   (require 'subr-x)
   (let ((result-buffer-name "*Sql String*")
 		(field-list (split-string (buffer-string) "[ \f\t\n\r\v]+" t)))
@@ -19,7 +19,7 @@
 
 
 (defun fields-to-update-sql (select-symbol)
-  (interactive (list (completing-read "select:" (list ":" "@"))))
+  (interactive (list (completing-read "Select symbol:" (list ":" "@"))))
   (require 'subr-x)
   (let ((result-buffer-name "*Sql String*")
 		(field-list (split-string (buffer-string) "[ \f\t\n\r\v]+" t)))
