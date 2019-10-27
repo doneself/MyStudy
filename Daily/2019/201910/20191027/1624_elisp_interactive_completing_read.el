@@ -1,4 +1,4 @@
-elisp interactive completing read
+;;elisp interactive completing read
 
 (defun select-some-thing (someone sometwo)
   (interactive
