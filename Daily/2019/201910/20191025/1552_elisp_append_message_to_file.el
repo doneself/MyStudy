@@ -13,3 +13,7 @@
 
 
 (buffer-substring-no-properties (region-beginning) (region-end))
+
+(defun append-line-to-other-buffer()
+  (interactive)
+  (append-to-buffer (other-buffer) (line-beginning-position) (line-end-position)))
