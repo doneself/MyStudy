@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+	<style>
+	  p:before{
+		  content:"※";
+		  color:red;
+		  font-size:24px;
+		  font-weight:bold;
+	  }
+	  p.no_text:before{
+		  content:none;
+		  color:red;
+		  font-size:24px;
+		  font-weight:bold;
+	  }
+	  p#other_text:before{
+		  content:"新内容";
+		  color:red;
+		  font-size:24px;
+		  font-weight:bold;
+	  }
+	</style>
+  </head>
+  <body>
+	<p>伪元素选择器</p>
+	<p id="other_text">伪元素选择器</p>
+	<p class="no_text">伪元素选择器</p>
+  </body>
+</html>
