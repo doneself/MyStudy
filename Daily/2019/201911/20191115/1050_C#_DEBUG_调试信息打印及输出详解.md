@@ -11,10 +11,13 @@
 
  3.debug可以自定义监听器  
   (下例将信息存入磁盘文件)  
+
+  ``` csharp
   System.Diagnostics.TextWriterTraceListener   t=new   System.Diagnostics.TextWriterTraceListener(@"c:/a.txt");  
   System.Diagnostics.Debug.Listeners.Add(t);  
   System.Diagnostics.Debug.WriteLine("信息");  
   t.Flush();
+  ```
 
  
 
