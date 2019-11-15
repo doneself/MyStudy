@@ -1,7 +1,5 @@
 # C# DEBUG 调试信息打印及输出详解
-https://blog.csdn.net/aaaaatiger/article/details/5583301
 
- 
 
 1.debug只在[debug模式下才执行](运行按钮后面的下拉框可选)  
 
