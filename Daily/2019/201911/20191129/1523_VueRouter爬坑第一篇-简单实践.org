@@ -1,0 +1,134 @@
+* VueRouter爬坑第一篇-简单实践
+[[https://www.cnblogs.com/HouJiao/p/11868571.html][原文地址]]
+
+* 前言 （其实为作者自我说明）
+
+** 作者实例项目特点
+1. 项目没有安装vue-router
+2. 项目的src文件夹，不会存在router的目录
+3. helloworld组件的展示是通过app组件的引入，即vue-cli创建时候的样子。
+
+* 安装vue-router
+
+** npm 安装
+命令：npm install vue-router
+
+** 使用vue-router， 在入口文件里面
+1. 引用vue-router，代码 import Router from 'Vue-router'
+2. 将组件注册到全局， Vue.use(Router)
+
+* 组件和路由之间的映射
+暂时理解为，组件的Vue文件里面，添加路由链接<router-link>
+
+** Vue文件中添加<router-link>
+关于router-link的官方文档说明 [[https://router.vuejs.org/zh/api/#router-link][官方文档]]
+
+*** Vue文件中添加router-link
+
+#+BEGIN_SRC html
+  <template>
+    <div class="hello">
+      <p>这里是HelloWorld组件</p>
+      <!-- 可跳转的URL -->
+      <router-link to="/index">点击这里渲染出另外一个组件</router-link>   
+    </div>
+  </template>
+#+END_SRC
+
+*** 运行命令查看显示效果
+命令：npm run dev
+
+*** 结果分析
+<router-link>编译之后的html代码为：
+
+#+BEGIN_SRC html
+<a data-v-469af010 href="#/index" class>点击这里渲染出另外一个组件</a>
+#+END_SRC
+
+* 编写链接要跳转的组件
+
+** 创建vue组件的代码
+
+#+BEGIN_SRC html
+<template>
+    <div>  
+        <h1>这里是Index.vue组件</h1>
+    </div>
+</template>
+<script>
+export default {
+    name: 'Index'
+}
+</script>
+#+END_SRC
+
+* 定义路由
+
+** 修改目录src下router/router.js
+
+#+BEGIN_SRC javascript
+  // vue-router使用第一步：引入vue-router
+  import Vue from "vue"
+  import Router from "vue-router"
+
+  // vue-router使用第二步：组件注册到全局
+  Vue.use(Router)
+
+  // 第三步：定义路由配置
+  // 引入路由需要映射的组件
+  import Index from '@/components/Index.vue'
+  const routes = [
+      {
+          path: '/index',   // 匹配的URL
+          component: Index  //映射的目标组件
+      }
+  ]
+
+  // 第四步：创建vue-router实例，传递前面定义的路由配置
+  const router = new Router({
+      routes: routes
+  })
+
+  // 第五步：将vue-router实例使用export导出（供其他模块使用）
+  export default router 
+#+END_SRC
+
+* 入口文件main.js配置路由
+
+前面的三个部分完成后，还需要在入口文件处把这个路由实例注入到跟组件中，这样整个应用都可以拥有路由功能。
+
+#+BEGIN_SRC javascript
+  // The Vue build version to load with the `import` command
+  // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+  import Vue from 'vue'
+  import App from './App'
+  import router from './router/router'
+  Vue.config.productionTip = false
+
+  /* eslint-disable no-new */
+  new Vue({
+    el: '#app',
+    components: { App },
+    template: '<App/>',
+    //将路由实例注册到根组件中
+    router: router
+  })
+#+END_SRC
+
+* 5.配置组件渲染的位置
+
+<router-view>加入到HelloWorld.vue文件代码中。<router-view>的位置，会被替换为跳转路由指向的组件代码。
+
+#+BEGIN_SRC html
+  <template>
+    <div class="hello">
+      <p>这里是HelloWorld组件</p>
+      <!-- 可跳转的URL -->
+      <router-link to="/index">点击这里去另外一个组件</router-link>
+    
+      <!-- 使用下面的这个标签可以告诉vue-router将匹配到的组件渲染到这个位置 -->
+      <router-view></router-view>
+    </div>
+  </template>
+  // 后面的script和style没有修改，因此省略
+#+END_SRC
