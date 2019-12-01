@@ -1,0 +1,24 @@
+* TODO 预备知识 [0/2]
+1. [ ] Linux系统中，每个设备被当成一个文件。
+* TODO 设备对应的文件名 [0/10]
+1. [ ] IDE硬盘 /dev/hd[a-d]
+2. [ ] SCSI/SATA/USB硬盘 /dev/sd[a-p]
+3. [ ] 软驱 /dev/fd[0-1]
+4. [ ] 打印机25针 /dev/lp[0-2]
+5. [ ] 打印机USB /dev/usb/lp[0-15]
+6. [ ] 鼠标USB /dev/usb/mouse[0-15]
+7. [ ] 鼠标PS /dev/psaux
+8. [ ] 当前CD ROM/DVD ROM /dev/cdrom
+9. [ ] 当前鼠标 /dev/mouse
+10. [ ] 磁带机 /dev/ht0或/dev/st0
+* 磁盘相关
+** TODO 磁盘的组成 [0/4]
+1. [ ] 盘片
+2. [ ] 主轴马达
+3. [ ] 磁头
+4. [ ] 机械手臂
+** TODO 盘片数据名词 [0/3]
+1. [ ] 扇区
+2. [ ] 磁道
+3. [ ] 柱面
+** TODO 扇区属性P12 [/]
