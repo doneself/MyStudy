@@ -1,4 +1,4 @@
-# Windows 2208 R2 IIS部署问题
+# Windows 2008 R2 IIS部署问题
 
 If you are *not* able to apply the [QFE from kb 980368](http://support.microsoft.com/kb/980368), instead of using the *runAllManagedModulesForAllRequests* solution as suggested in the accepted [answer](https://stackoverflow.com/a/12653278/29491), you should use the modules configuration with *preCondition=""* shown below to avoid the negative impact on static content as described in the blog posts [How asp.NET MVC Routing Works and its Impact on the Performance of Static Requests](http://blogs.msdn.com/b/tmarq/archive/2010/04/01/asp-net-4-0-enables-routing-of-extensionless-urls-without-impacting-static-requests.aspx) and [Don't use runAllManagedModulesForAllRequests="true" when getting your MVC routing to work](http://www.britishdeveloper.co.uk/2010/06/dont-use-modules-runallmanagedmodulesfo.html) and some of the comments on the answers.
 
