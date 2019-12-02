@@ -1,0 +1,58 @@
+* 示例
+* Javascript对象的特点
+1. [ ] 对象是键/值对。
+2. [ ] 创建对象的最常用方法是使用花括号{}
+3. [ ] 对象使用点表示法向对象添加属性和方法。
+* 函数的实例化(unctional Instantiation)
+** 代码实现
+1. [ ] function Animal (name, energy)
+2. [ ] let animal = {}
+3. [ ] animal.name = name
+4. [ ] animal.eat = function (amount) {
+5. [ ] return animal
+6. [ ] const leo = Animal('Leo', 7)
+** 缺点
+1. [ ] 当对象的方法是通用的时候，每个新建对象的函数都是动态的，浪费内存。
+** 解决方法：函数实例化与共享方法
+*** TODO 代码实现 [0/14]
+- [ ] const animalMethods = {}
+- [ ] eat(amount) {}
+- [ ] sleep(length) {
+- [ ] play(length) {
+- [ ] function Animal (name, energy) {
+- [ ] let animal = {}
+- [ ] animal.name = name
+- [ ] animal.energy = energy
+- [ ] animal.eat = animalMethods.eat
+- [ ] animal.sleep = animalMethods.sleep
+- [ ] animal.play = animalMethods.play
+- [ ] return animal
+- [ ] 通过将共享方法移动到它们自己的对象并在 Animal 函数中引用该对象，
+- [ ] 我们现在已经解决了内存浪费和新对象体积过大的问题。
+** 改进方法，利用Obejct.create
+*** TODO Object.create要点 [0/3]
+1. [ ] Object.create 允许你创建一个对象
+2. [ ] 只要该对象上的属性查找失败，
+3. [ ] 它就可以查询另一个对象以查看该另一个参数对象是否具有该属性。
+*** TODO 使用共享方法 和 Object.create 的函数实例化 [0/5]
+1. [ ] function Animal (name, energy) {
+2. [ ] let animal = Object.create(animalMethods)
+3. [ ] animal.name = name
+4. [ ] animal.energy = energy
+5. [ ] return animal
+** 进一步改进，prototype
+*** TODO Object.create的缺点 [0/2]
+1. [ ] 为了跨实例共享方法，必须管理一个单独的对象（animalMethods）
+2. [ ] javascript的prototype属性进行改进
+*** TODO Javascript的prototype属性 [0/2]
+1. [ ] 每个函数都有一个引用对象的prototype属性
+*** TODO 原型(prototype)实例化 [0/8]
+1. [ ] function Animal (name, energy) {
+2. [ ] let animal = Object.create(Animal.prototype)
+3. [ ] animal.name = name
+4. [ ] animal.energy = energy
+5. [ ] return animal
+6. [ ] Animal.prototype.eat = function (amount) {
+7. [ ] Animal.prototype.sleep = function (length) {
+8. [ ] Animal.prototype.play = function (length) {
+
