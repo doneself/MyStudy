@@ -1,0 +1,35 @@
+* TODO 气象观测站合约 [0/1]
+1. [ ]
+* TODO 项目工作，建立一个应用 [0/2]
+1. [ ] 利用WeatherData对象取得数据
+2. [ ] 更新三个布告板
+   1. [ ] 目前状况
+   2. [ ] 气象统计
+   3. [ ] 天气预报
+* TODO 认识观察者模式
+** TODO 报纸和杂志订阅是什么回事 [0/4]
+1. [ ] 报社业务：出版报纸
+2. [ ] 客户订阅了报社报纸，只要报社有新出版的报纸，就会送给客户一份，
+3. [ ] 当客户取消订阅报纸，报社就不会再送这个客户报纸
+4. [ ] 报社运营期间，会有客户订阅报纸和取消订阅
+** TODO 观察者模式＝出版者＋订阅者 [0/2]
+1. [ ] 出版者
+   1. [ ] 主题对象管理某些数据
+   2. [ ] 当主题内数据改变，就会通知观察者
+2. [ ] 订阅者
+   1. [ ] 观察者已订阅时，主题数据改变时，就会收到数据更新
+* TODO 定义观察者模式类图
+** TODO Interface Subject [0/3]
+1. [ ] registerObserver()
+2. [ ] removeOberver()
+3. [ ] notifyObservers()
+** TODO Concrete Subject [0/5]
+1. [ ] registerobserver() {}
+2. [ ] removeoberver() {}
+3. [ ] notifyObservers() {}
+4. [ ] getState()
+5. [ ] setState()
+** TODO Interface Observer [0/1]
+1. [ ] update()
+** TODO Concrete Observer [0/1]
+1. [ ] update() {}
