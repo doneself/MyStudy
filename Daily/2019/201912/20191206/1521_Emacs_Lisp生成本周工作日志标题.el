@@ -35,8 +35,7 @@
 	(when workreport-file-exist
 	  (find-file-other-window file-full-name))
 	(unless workreport-file-exist
-	  (with-temp-buffer
-		(insert file-name)
-		(write-file file-full-name))
+	  (with-temp-file file-full-name
+		(insert file-name))
 	  (find-file-other-window file-full-name))
   ))
