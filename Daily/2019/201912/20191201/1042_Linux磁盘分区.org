@@ -22,7 +22,7 @@
 2. [ ] 磁道(Track)
 3. [ ] 柱面(Cylinder)
 4. [ ] 机械臂读取头(Head)
-** TODO 扇区属性 P12 [/]
+** TODO 扇区属性 P12 [0/1]
 1. [ ] 大小512bytes,不变
 ** TODO 柱面 [0/1]
 1. [ ] 最小的分区
@@ -30,3 +30,8 @@
 1. [ ] Head * Cylinder * Sector * 512bytes
 2. [ ] 硬盘制造商显示硬盘容量用10进制表示
 3. [ ] 市售500G容量硬盘，理论上会有460G容量
+* 主机规划与磁盘分区
+** TODO 第一个磁区 [0/2]
+1. [ ] 主要启动记录区(Master Boot Record, MBR)：可以安装启动管理程序的地方，有446 bytes
+2. [ ] 分割表(partition table)：记录整颗硬盘分割的状态，有64 bytes
+** 磁盘分区表(partition table) [/]
