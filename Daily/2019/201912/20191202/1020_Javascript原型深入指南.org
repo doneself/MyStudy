@@ -15,21 +15,24 @@
 ** 缺点
 1. [ ] 当对象的方法是通用的时候，每个新建对象的函数都是动态的，浪费内存。
 ** 解决方法：函数实例化与共享方法
-*** TODO 代码实现 [0/14]
-- [ ] const animalMethods = {}
-- [ ] eat(amount) {}
-- [ ] sleep(length) {
-- [ ] play(length) {
-- [ ] function Animal (name, energy) {
-- [ ] let animal = {}
-- [ ] animal.name = name
-- [ ] animal.energy = energy
-- [ ] animal.eat = animalMethods.eat
-- [ ] animal.sleep = animalMethods.sleep
-- [ ] animal.play = animalMethods.play
-- [ ] return animal
-- [ ] 通过将共享方法移动到它们自己的对象并在 Animal 函数中引用该对象，
-- [ ] 我们现在已经解决了内存浪费和新对象体积过大的问题。
+*** TODO 代码实现 [0/5]
++ [ ] 新建对象
+  1. [ ] const animalMethods = {}
++ [ ] 新建函数，用于对象内
+  1. [ ] eat(amount) {}
+  2. [ ] sleep(length) {}
+  3. [ ] play(length) {}
++ [ ] 构造函数以及内部
+  1. [ ] function Animal (name, energy) {
+     1. [ ] let animal = {}
+     2. [ ] animal.name = name
+     3. [ ] animal.energy = energy
+     4. [ ] animal.eat = animalMethods.eat
+     5. [ ] animal.sleep = animalMethods.sleep
+     6. [ ] animal.play = animalMethods.play
+     7. [ ] return animal
++ [ ] 通过将共享方法移动到它们自己的对象并在 Animal 函数中引用该对象，
++ [ ] 我们现在已经解决了内存浪费和新对象体积过大的问题。
 ** 改进方法，利用Obejct.create
 *** TODO Object.create要点 [0/3]
 1. [ ] Object.create 允许你创建一个对象
@@ -68,14 +71,14 @@
 4. [ ] this.energy = energy
 5. [ ] 隐藏细节：// return this
 * EcmaScript6 class关键字
-** TODO 实现例子 [0/7]
-1. [ ] class Animal {
-2. [ ] constructor(name, energy) {
-3. [ ] this.name = name
-4. [ ] this.energy = energy
-5. [ ] eat(amount) {}
-6. [ ] sleep(length) {}
-7. [ ] play(length) {}
+** TODO 实现例子 [0/1]
++ [ ] class Animal {
+  1. [ ] constructor(name, energy) {
+  2. [ ] this.name = name
+  3. [ ] this.energy = energy
+  4. [ ] eat(amount) {}
+  5. [ ] sleep(length) {}
+  6. [ ] play(length) {}
 * 数组方法
 ** TODO 创建数组的方法 [0/2]
 1. [ ] const friendsWithSugar = []
@@ -84,3 +87,102 @@
 1. [ ] splice, slice, pop
 ** TODO 打印array数组的prototype [0/1]
 1. [ ] console.log(Array.prototype)
+* 静态方法
+** TODO nextToEat函数 [0/5]
+1. [ ] function nextToEat (animals) {
+   1. [ ] const sortedByLeastEnergy = animals.sort()
+   2. [ ] return sortedByLeastEnergy[0].name
+2. [ ] class Animal {}
+3. [ ] const leo = new Animal('Leo', 7)
+4. [ ] const snoop = new Animal('Snoop', 10)
+5. [ ] console.log(nextToEat([leo, snoop]))
+** TODO 类class的静态属性static，更好的实现 [0/4]
+1. [ ] class Animal {
+   1. [ ] constructor(name, energy) {
+   2. [ ] eat(amount) {}
+   3. [ ] sleep(length) {}
+   4. [ ] play(length) {}
+   5. [ ] static nextToEat(animals) {}
+2. [ ] const leo = new Animal('Leo', 7)
+3. [ ] const snoop = new Animal('Snoop', 10)
+4. [ ] console.log(Animal.nextToEat([leo, snoop]))
+** TODO ES5没有static关键字，如何实现 [0/8]
+1. [ ] function Animal (name, energy) {
+2. [ ] Animal.prototype.eat = function (amount) {}
+3. [ ] Animal.prototype.sleep = function (length) {}
+4. [ ] Animal.prototype.play = function (length) {}
+5. [ ] Animal.nextToEat = function (nextToEat) {}
+6. [ ] const leo = new Animal('Leo', 7)
+7. [ ] const snoop = new Animal('Snoop', 10)
+8. [ ] console.log(Animal.nextToEat([leo, snoop]))
+* 获取对象的原型
+** TODO 使用Object.getPrototypeOf方法 [0/8]
+1. [ ] function Animal (name, energy) {}
+2. [ ] Animal.prototype.eat = function (amount) {}
+3. [ ] Animal.prototype.sleep = function (length) {}
+4. [ ] Animal.prototype.play = function (length) {}
+5. [ ] const leo = new Animal('Leo', 7)
+6. [ ] const proto  = Object.getPrototypeOf(leo)
+7. [ ] console.log(proto) // {constructor: ƒ, eat: ƒ, sleep: ƒ, play: ƒ}
+8. [ ] proto === Animal.prototype // true
+* 判断原型上是否包含某个属性
+** TODO 使用for in 循环方式，打印所有属性，包括原型 [0/6]
+1. [ ] function Animal (name, energy) {
+   1. [ ] this.name = name
+   2. [ ] this.energy = energy
+2. [ ] Animal.prototype.eat = function (amount) {}
+3. [ ] Animal.prototype.sleep = function (length) {}
+4. [ ] Animal.prototype.play = function (length) {}
+5. [ ] const leo = new Animal('Leo', 7)
+6. [ ] for(let key in leo) {
+   1. [ ] console.log(`Key: ${key}. Value: ${leo[key]}`)
+*** TODO 打印结果 [0/5]
+1. [ ] Key: name. Value: Leo
+2. [ ] Key: energy. Value: 7
+3. [ ] Key: eat. Value: function (amount) {}
+4. [ ] Key: sleep. Value: function (length) {}
+5. [ ] Key: play. Value: function (length) {}
+** TODO 只打印实例本身的属性 [0/2]
+1. [ ] const leo = new Animal('Leo', 7)
+2. [ ] for(let key in leo) {
+   1. [ ] if (leo.hasOwnProperty(key)) {
+      1. [ ] console.log(`Key: ${key}. Value: ${leo[key]}`)
+*** 打印结果
+1. [ ] Key: name. Value: Leo
+2. [ ] Key: energy. Value: 7
+* 检查对象是否是类的实例
+** 使用instanceof运算符
+1. object instanceof Class
+** TODO 实例 [0/5]
+1. [ ] function Animal (name, energy) {
+2. [ ] function User () {}
+3. [ ] const leo = new Animal('Leo', 7)
+4. [ ] leo instanceof Animal // true
+5. [ ] leo instanceof User // false
+* 创建新的不可知的构造函数
+** 为了防止避免程序员忘记new产生的问题，构造函数可以以下方式写
+1. function Animal (name, energy) {
+   1. if (this instanceof Animal === false) {
+      1. return new Animal(name, energy)
+   2. this.name = name
+   3. this.energy = energy
+2. const leo = Animal('Leo', 7)
+3. const leo1 = new Animal('Leo', 7)
+* 重写 Object.create
+** TODO Object.create的工作原理了解多少 [0/3]
+1. [ ] 它接受一个对象的参数。
+2. [ ] 它创建一个对象，在查找失败时委托给参数对象
+3. [ ] 它返回新创建的对象。
+** TODO 实现方法 [0/1]
+1. [ ] Object.create = function (objToDelegateTo) {
+   1. [ ] function Fn(){}
+   2. [ ] Fn.prototype = objToDelegateTo
+   3. [ ] return new Fn()
+* 箭头函数
+** 箭头函数没有自己的this关键字。
+1. [ ] 因此，箭头函数不能是构造函数，如果你尝试使用new关键字调用箭头函数，它将引发错误。
+2. [ ] const Animal = () => {}
+3. [ ] const leo = new Animal() // Error: Animal is not a constructor
+** 因为我们在上面说明了伪类实例模式不能与箭头函数一起使用，所以箭头函数也没有原型属性。
+1. [ ] const Animal = () => {}
+2. [ ] console.log(Animal.prototype) // undefined
