@@ -1,4 +1,5 @@
 * 示例
+原文地址： [[https://mp.weixin.qq.com/s/4dP4MKxIl56Mws2gfq6Piw][Link]]
 * Javascript对象的特点
 1. [ ] 对象是键/值对。
 2. [ ] 创建对象的最常用方法是使用花括号{}
@@ -55,4 +56,31 @@
 6. [ ] Animal.prototype.eat = function (amount) {
 7. [ ] Animal.prototype.sleep = function (length) {
 8. [ ] Animal.prototype.play = function (length) {
-
+* 使用new对象实现
+** TODO 创建对象麻烦方法的要点 [0/3]
+1. [ ] 如何创建构造函数。
+2. [ ] 如何向构造函数的原型添加方法。
+3. [ ] 如何使用 Object.create 将失败的查找委托给函数的原型。
+** TODO 使用new，代码隐藏了的细节 [0/5]
+1. [ ] function Animal (name, energy) {
+2. [ ] 隐藏细节：// const this = Object.create(Animal.prototype)
+3. [ ] this.name = name
+4. [ ] this.energy = energy
+5. [ ] 隐藏细节：// return this
+* EcmaScript6 class关键字
+** TODO 实现例子 [0/7]
+1. [ ] class Animal {
+2. [ ] constructor(name, energy) {
+3. [ ] this.name = name
+4. [ ] this.energy = energy
+5. [ ] eat(amount) {}
+6. [ ] sleep(length) {}
+7. [ ] play(length) {}
+* 数组方法
+** TODO 创建数组的方法 [0/2]
+1. [ ] const friendsWithSugar = []
+2. [ ] const friendsWithoutSugar = new Array()
+** TODO Array数组包含内置方法 [0/1]
+1. [ ] splice, slice, pop
+** TODO 打印array数组的prototype [0/1]
+1. [ ] console.log(Array.prototype)
