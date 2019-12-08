@@ -1,0 +1,40 @@
+* OWIN的理解和实践(一) 解耦,协作和开放
+
+** TODO 概述 [0/4]
+1. [ ] OWIN的全称是Open Web Interface For .Net,
+2. [ ] 是MS在VS2013期间引入的全新的概念
+3. [ ] OWIN是一种规范和标准, 不代表特定技术.
+4. [ ] OWIN的核心理念是解耦，协作和开放
+   
+** TODO 4层理念 [0/4]
+1. [ ] Host： 宿主
+2. [ ] Server： 服务器
+3. [ ] Middleware： 中间件
+4. [ ] Application： 具体应用
+
+** TODO 4层理念理解 [0/4]
+1. [ ] Host： 应用程序的主进程
+   1. [ ] 主要负责启动,关闭Server,
+   2. [ ] 为Server加载各种Middleware组件,
+   3. [ ] 当然同时也装载Application.
+2. [ ] Server：监听端口，接收Http Request，返回Http Response，
+3. [ ] Middleware: 装载在在Server中的Middleware提供各种功能,
+   1. [ ] 处理Request, 然后通过某种方式, 返回Reponses.
+   2. [ ]  某些Middleware也可以不返回任何Response, 而仅仅是做内部处理,比如实现Session的Middleware
+4. [ ] Application:
+   1. [ ] 开发者真正关注的业务系统内容,
+   2. [ ] Reponses中真正业务内容的提供者.
+
+** TODO 意义和远景 [0/4]
+1. [ ] OWIN规则使得各层能够解耦,
+   1. [ ] 可以把Host, Server, Middleware 和Application交给不同的开发者来完成
+   2. [ ] 然后完成整合.
+2. [ ] 只要基于同一的OWIN的标准,各层间不同实现的协作更加便利,
+   1. [ ] 除Application层必须自行开发以外,
+   2. [ ] Host我们可以选择IIS,
+      1. [ ] 也可以选择任何进程
+      2. [ ] 包括在Mono支持下的其他操作系统的进程;
+3. [ ] Server目前有MS的Kanata ,
+   1. [ ] Linux上的Jexus;
+4. [ ]  而Middleware则有更加广泛的选择,
+   1. [ ] MS已经提供的WebApi, Identity, SignalR都已经是基于OWIN标准的中间件实现
