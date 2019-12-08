@@ -1,0 +1,11 @@
+* 第27天 说说你对arguments的理解 它是数组吗
+
+** TODO 描述 [0/8]
+1. [ ] arguments是一个对象。
+2. [ ] js中每个函数都会有arguments这个实例对象，
+3. [ ] 可以用数组下标的方式"[]"引用arguments的元素
+4. [ ] arguments.length为函数实参个数
+5. [ ] arguments.callee引用函数自身。
+6. [ ] 严格模式禁用了arguments.callee
+7. [ ] arguments这个对象不能显式创建。
+8. [ ] Arrary.from能够转化类数组对象成为数组 Arrary.from(arguments)
