@@ -1,0 +1,21 @@
+* Owin Startup 类解析
+
+** TODO 特点 [0/4]
+1. [ ] 每个 Owin 程序都有 startup 类，
+2. [ ] 在这个 startup 类里面你可以指定应用程序管道模型中的组件。
+3. [ ] 你可以通过不同的方式来连接你的 startup 类和运行时，
+4. [ ] 这些取决于你选择的宿主模型（OwinHost, IIS, and IIS-Express）。
+   
+** TODO 连接你的 startup 类和宿主程的方式 [0/4]
+1. [ ] 命名约定：Katana 会在 namespace 中查找一个叫 Startup 的类。
+2. [ ] OwinStartup 特性：这是开发者最常用的一种方式，
+   1. [ ] [assembly: OwinStartup(typeof(OwinDemo.Startup))]
+3. [ ] Configuration 文件中的 appSetting 元素，
+   1. [ ] appSetting 元素会覆盖命名约定和 OwinStartup 特性。
+   2. [ ] 你可以有多个 startup 类 (每个都使用 OwinStartup 特性)
+   3. [ ] 可以用下面的配置文件来选择使用哪一个 startup 类。
+   4. [ ] <add key="owin:appStartup" value="OwinDemo.Startup2" />
+4. [ ] 如果要关闭 OWIN startup 发现，
+   1. [ ] 那么只需要在 appSetting 里面加入下面的代码
+   2. [ ] <add key="owin:AutomaticAppStartup " value="false" />
+
