@@ -1,7 +1,8 @@
 * MVC中使用OWIN Forms authentication验证
 
-** TODO 创建一个MVC项目 [0/1]
+** TODO 创建一个MVC项目 [0/2]
 1. [ ] 项目名称： OwinFormsAuth
+2. [ ] 源地址：[[https://devblogs.microsoft.com/aspnet/understanding-owin-forms-authentication-in-mvc-5/#_Creating_MVC_project][LINK]]
 
 ** TODO 项目描述 [0/1]
 1. [ ] App_Start/Startup.Auth.cs
