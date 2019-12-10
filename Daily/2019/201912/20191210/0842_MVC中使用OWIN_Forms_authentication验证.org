@@ -1,0 +1,87 @@
+* MVC中使用OWIN Forms authentication验证
+
+** TODO 创建一个MVC项目 [0/1]
+1. [ ] 项目名称： OwinFormsAuth
+
+** TODO 项目描述 [0/1]
+1. [ ] App_Start/Startup.Auth.cs
+
+** 理解OWIN Forms authentication的设置
+
+*** TODO App_Start/Startup.Auth.cs [0/3]
+1. [ ] app.UseApplicationSignInCookie();
+2. [ ] app.UseExternalSignInCookie();
+3. [ ] 两个扩展方法实际调用UseFormsAuthentication,然后特定设置。
+
+*** TODO UseApplicationSignInCookie [0/1]
+1. [ ] IAppBuilder UseApplicationSignInCookie(thisIAppBuilder app)
+   1. [ ] return UseFormsAuthentication(app, new FormsAuthenticationOptions{}
+      1. [ ] AuthenticationType = FormsAuthenticationDefaults.ApplicationAuthenticationType,
+      2. [ ] AuthenticationMode = AuthenticationMode.Active,
+      3. [ ] CookieName = FormsAuthenticationDefaults.CookiePrefix +
+         1. [ ] FormsAuthenticationDefaults.ApplicationAuthenticationType,
+      4. [ ] LoginPath = FormsAuthenticationDefaults.LoginPath,
+      5. [ ] LogoutPath = FormsAuthenticationDefaults.LogoutPath,
+
+*** TODO UseExternalSignInCookie [0/2]
+1. [ ] app.SetDefaultSignInAsAuthenticationType
+   1. [ ] (FormsAuthenticationDefaults.ExternalAuthenticationType);
+2. [ ] return UseFormsAuthentication(app, new FormsAuthenticationOptions
+   1. [ ] AuthenticationType = FormsAuthenticationDefaults.ExternalAuthenticationType,
+   2. [ ] AuthenticationMode = AuthenticationMode.Passive,
+   3. [ ] CookieName = FormsAuthenticationDefaults.CookiePrefix +
+      1. [ ] FormsAuthenticationDefaults.ExternalAuthenticationType,
+   4. [ ] ExpireTimeSpan = TimeSpan.FromMinutes(5),
+
+*** TODO UseFormsAuthentication [0/1]
+1. [ ] app.UseFormsAuthentication(new FormsAuthenticationOptions()
+   1. [ ] AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode.Active,
+   2. [ ] AuthenticationType = “MyApplication”,
+   3. [ ] CookieDomain = “.myapp.com”,
+   4. [ ] CookieHttpOnly = true,
+   5. [ ] CookieName = “.AspNet.MyApplication”,
+   6. [ ] CookiePath = “/Account”,
+   7. [ ] CookieSecure = CookieSecureOption.Always,
+   8. [ ] ExpireTimeSpan = TimeSpan.FromDays(1),
+   9. [ ] LoginPath = “/Account/Login”,
+   10. [ ] ReturnUrlParameter = “return_url”,
+   11. [ ] SlidingExpiration = true,
+   12. [ ] Provider = new FormsAuthenticationProvider(){}
+       1. [ ] OnResponseSignin = async ctx =>
+          1. [ ] Console.WriteLine(“OnResponseSignin”);
+          2. [ ] PrintClaimsIdentity(ctx.Identity);
+       2. [ ] OnValidateIdentity = async ctx =>
+          1. [ ] Console.WriteLine(“OnValidateIdentity”);
+          2. [ ] PrintClaimsIdentity(ctx.Identity);
+
+**** UseFormsAuthentication Code
+
+#+BEGIN_SRC csharp
+app.UseFormsAuthentication(new FormsAuthenticationOptions()
+{
+    AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode.Active,
+    AuthenticationType = “MyApplication”,
+    CookieDomain = “.myapp.com”,
+    CookieHttpOnly = true,
+    CookieName = “.AspNet.MyApplication”,
+    CookiePath = “/Account”,
+    CookieSecure = CookieSecureOption.Always,
+    ExpireTimeSpan = TimeSpan.FromDays(1),
+    LoginPath = “/Account/Login”,
+    ReturnUrlParameter = “return_url”,
+    SlidingExpiration = true,
+    Provider = new FormsAuthenticationProvider()
+    {
+        OnResponseSignin = async ctx =>
+        {
+            Console.WriteLine(“OnResponseSignin”);
+            PrintClaimsIdentity(ctx.Identity);
+        },
+        OnValidateIdentity = async ctx =>
+        {
+            Console.WriteLine(“OnValidateIdentity”);
+            PrintClaimsIdentity(ctx.Identity);
+        }
+    }
+});
+#+END_SRC
