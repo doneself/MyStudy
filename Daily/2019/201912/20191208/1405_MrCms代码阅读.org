@@ -1,12 +1,15 @@
 * MrCms代码阅读
-* TODO 参考资料 [0/3]
+
+* 参考资料
 1. [ ] github仓库 [[https://github.com/MrCMS/MrCMS][Link]]
 2. [ ] 官方网站 [[https://www.mrcms.com/][Link]]
 3. [ ] 本地代码文件夹 [[file+emacs:d:/Zero/Codes/201912/MrCMS/][Folder]]
+   
 * 知识点
 ** TODO web项目启动入口文件 Global.asax.cs [0/2]
 1. [ ] 文件地址 [[file+emacs:D:\Zero\Codes\201912\MrCMS\MrCMS.Web\Global.asax.cs][File]]
 2. [ ] 自定义HttpApplication ：MrCMSApplication
+   
 ** MrCMSApplication配置
 *** TODO MrCMSApplication主要部分 [0/9]
 1. [ ] 继承自HttpApplication
@@ -24,8 +27,10 @@
 7. [ ] protected virtual void SetModelBinders()
 8. [ ] public override void Init()
 9. [ ] private bool IsCachedMissingFileRequest()
+   
 *** TODO MrCMSApplication.Application_Start() [0/1]
 1. [ ] MrCMSApp.RegisterAllApps();
+   
 ** MrCMS.Apps.MrCMSApp
 *** TODO MrCMSApp字段属性 [0/9]
 1. [ ] protected abstract void RegisterApp(MrCMSAppRegistrationContext context);
@@ -37,6 +42,7 @@
 7. [ ] readonly Dictionary<Type, string> AppUserProfileDatas
 8. [ ] readonly Dictionary<Type, string> AppEntities
 9. [ ] readonly Dictionary<Type, string> AllAppTypes
+   
 *** TODO 构造函数  [0/2]
 1. [ ] AllApps.ForEach(
 2. [ ] app=>{}
@@ -45,19 +51,20 @@
       2. [ ] .FindAll(type => CheckIsInApp(type, app));
    2. [ ] webpageTypes
       1. [ ] .ForEach(type => AppWebpages[type] = app.AppName);
+         
 * 技术知识点
 ** TODO C＃箭头语法糖 <<point001>> [0/2]
 1. [ ] Lambda表达式
 2. [ ] Expression body definition
    1. [ ] member => expression;
    2. [ ] public override string ToString() => $"{fname} {lname}".Trim();
+      
 ** TODO C# abstract 抽象类和方法 [0/4]
 1. [ ] abstract 修饰符指示被修改内容的实现已丢失或不完整。
 2. [ ] abstract 修饰符可用于类、方法、属性、索引和事件。
 3. [ ] 在类声明中使用 abstract 修饰符来指示某个类仅用作其他类的基类
 4. [ ] 标记为抽象的成员必须由派生自抽象类的非抽象类来实现。
+   
 ** ASPNet Owin
 *** TODO 全名 [0/1]
 1. [ ] Open Web Interface for .NET
-*** TODO 简介 [0/1]
-1. [ ] 
