@@ -52,6 +52,18 @@
    2. [ ] webpageTypes
       1. [ ] .ForEach(type => AppWebpages[type] = app.AppName);
          
+** MrCMSApp.AllApps
+
+*** TODO get属性 [0/2]
+1. [ ] _allApps ??
+2. [ ] TypeHelper.GetAllConcreteTypesAssignableFrom<MrCMSApp>()
+   1. [ ] .Select(type => ((MrCMSApp)Activator.CreateInstance(type))).ToList();
+
+*** TODO 初始的值 [0/3]
+1. [ ] {MrCMS.Web.Apps.Galleries.GalleriesApp}
+2. [ ] {MrCMS.Web.Apps.Core.CoreApp}
+3. [ ] {MrCMS.Web.Apps.Articles.ArticlesApp}
+   
 * 技术知识点
 ** TODO C＃箭头语法糖 <<point001>> [0/2]
 1. [ ] Lambda表达式
@@ -65,6 +77,12 @@
 3. [ ] 在类声明中使用 abstract 修饰符来指示某个类仅用作其他类的基类
 4. [ ] 标记为抽象的成员必须由派生自抽象类的非抽象类来实现。
    
-** ASPNet Owin
-*** TODO 全名 [0/1]
-1. [ ] Open Web Interface for .NET
+** TODO ASPNet Owin
+
+* 待了解知识点
+
+** System.Web.Mvc.ModelBinders
+
+** System.Web.Mvc.ViewEngines
+
+** System.Web.Routing.RouteTable
