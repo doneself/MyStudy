@@ -1,0 +1,6 @@
+cmd 开关网卡
+
+禁用网卡:
+netsh interface set interface "LocalNetWork" disabled
+启用网卡 :
+netsh interface set interface "LocalNetWork" enabled
