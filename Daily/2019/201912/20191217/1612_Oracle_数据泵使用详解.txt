@@ -1,0 +1,145 @@
+Oracle 数据泵使用详解
+
+数据泵使用EXPDP和IMPDP时应该注意的事项：
+
+EXP和IMP是客户端工具程序，它们既可以在客户端使用，也可以在服务端使用。
+
+EXPDP和IMPDP是服务端的工具程序，他们只能在ORACLE服务端使用，不能在客户端使用。
+
+IMP只适用于EXP导出的文件，不适用于EXPDP导出文件；IMPDP只适用于EXPDP导出的文件，而不适用于EXP导出文件。
+
+expdp或impdp命令时，可暂不指出用户名/密码@实例名 as 身份，然后根据提示再输入，如：
+
+
+expdp schemas=scott dumpfile=expdp.dmp DIRECTORY=dir;
+环境
+windows2003SP2
+
+oracle11gR1
+使用expdp和impdp
+1.命令行打开sqlplus
+sqlplus /nolog
+conn / as sysdba
+2.创建逻辑目录，该命令不会在操作系统创建真正的目录（最好手工先建好），最好以administrator等管理员创建。
+create directory dir as 'd:\dump'; //dir名称可以随便命名 需要手工创建d:\dump
+3.查看管理理员目录（同时查看操作系统中是否存在，因为Oracle并不关心该目录是否存在，如果不存在，则出错）
+select * from dba_directories;
+4.给scott用户赋予在指定目录的操作权限，最好以system等管理员赋予。
+grant read,write on directory dir to scott;
+5、导出数据
+
+1)按用户导
+
+expdp scott/tiger@orcl schemas=scott dumpfile=expdp.dmp DIRECTORY=dir logfile=expdp.log
+
+2)并行进程parallel
+
+expdp scott/tiger@orcl directory=dir dumpfile=scott3.dmp parallel=40 job_name=scott3
+
+3)按表名导
+
+expdp scott/tiger@orcl TABLES=emp,dept dumpfile=expdp.dmp DIRECTORY=dir;
+
+4)按查询条件导
+
+expdp scott/tiger@orcl directory=dir dumpfile=expdp.dmp Tables=emp query='WHERE deptno=20';
+
+5)按表空间导
+
+expdp system/manager DIRECTORY=dir DUMPFILE=tablespace.dmp TABLESPACES=temp,example;
+
+6)导整个数据库
+
+expdp system/manager DIRECTORY=dir DUMPFILE=full.dmp FULL=y;
+6、还原数据
+
+1)导到指定用户下
+
+impdp scott/tiger@orcl DIRECTORY=dir DUMPFILE=expdp.dmp SCHEMAS=scott logfile=impdp.log
+
+2)改变表的owner
+
+impdp system/manager DIRECTORY=dir DUMPFILE=expdp.dmp TABLES=scott.dept REMAP_SCHEMA=scott:system;
+
+3)导入表空间
+
+impdp system/manager DIRECTORY=dir DUMPFILE=tablespace.dmp TABLESPACES=example;
+
+4)导入数据库
+
+impdb system/manager DIRECTORY=dump_dir DUMPFILE=full.dmp FULL=y;
+
+5)追加数据
+
+impdp system/manager DIRECTORY=dir DUMPFILE=expdp.dmp SCHEMAS=system TABLE_EXISTS_ACTION
+
+
+
+****************************************************************************************
+LINUX环境（RHEL5）
+oracle10g和oracle11g
+使用expdp和impdp
+1.命令行打开sqlplus
+sqlplus /nolog
+connect system/oracle
+2.创建逻辑目录，该命令不会在操作系统创建真正的目录（最后手工先建好），最好以system等管理员创建。
+create directory dpdata1 as '/home/oracle/dump';
+3.查看管理理员目录（同时查看操作系统是否存在，因为Oracle并不关心该目录是否存在，如果不存在，则出错）
+select * from dba_directories;
+4.给scott用户赋予在指定目录的操作权限，最好以system等管理员赋予。
+grant read,write on directory dpdata1 to scott;
+5.导出数据
+1)按用户导
+expdp scott/tiger@orcl schemas=scott dumpfile=expdp.dmp DIRECTORY=dpdata1;
+2)按表空间导
+expdp system/manager DIRECTORY=dpdata1 DUMPFILE=tablespace.dmp TABLESPACES=temp,example;
+3)导整个数据库
+expdp system/manager DIRECTORY=dpdata1 DUMPFILE=full.dmp FULL=y;
+6.还原数据
+1)导到指定用户下
+impdp scott/tiger DIRECTORY=dpdata1 DUMPFILE=expdp.dmp SCHEMAS=scott;
+3)导入表空间
+impdp system/manager DIRECTORY=dpdata1 DUMPFILE=tablespace.dmp TABLESPACES=example;
+4)导入数据库
+impdb system/manager DIRECTORY=dump_dir DUMPFILE=full.dmp FULL=y;
+*************************************************************************************
+expdp/impdp 不同用户，不同表空间的使用
+假设a用户的默认表空间是a，导出用户a所有数据：
+
+SQL> conn / as sysdba
+SQL> create directory dir as '/home/oracle/';
+SQL> grant read,write on directory dir to system;
+
+$expdp system/oracle directory=dir dumpfile=data.dmp schemas=a logfile=data.log
+
+impdp
+导入a用户所有数据到b，并且转换表空间a为b：
+
+SQL> conn sys / as sysdba
+SQL> create directory dir as '/home/oracle/';
+SQL> grant read,write on directory dir to system;
+
+$impdp system/oracle directory=dir dumpfile=data.dmp remap_tablespace=a:b remap_schema=a:b logfile=data.log
+
+
+
+解释：
+
+remap_schema=a:b 将数据的schema从a 转换为b
+
+remap_tablespace=a:b 将数据的tablespace 从a 转换为b
+
+
+注意：如果oracle是10g的，要加参数 EXCLUDE=TABLE_STATISTICS 选项将 table_statistics 对象过滤。 否则会出现数据泵导入中table_statistics长时间等待、用impdp 导入，检查 table_statistics 时等待了N长时间
+
+
+总结：执行impdp时无需创建b用户，在导入时会自动创建并改名用户a为b（拥有a的所有权限等），自动设置默认表空间为转换后的表空间b。如果有多个表空间需要转换，则使用多个remap_tablespace=源：目标字段。
+
+此种方法只限于支持oracle10g以上版本。
+
+
+数据泵导入中table_statistics长时间等待问题 
+用impdp 导入，检查 table_statistics 时等待了N长时间。
+
+网上说这是oracle 10G impdp 的一个bug，命令中若定义了 remap_schema 项，也就是原用户名和导入的用户名不一致，则会有这个问题。
+网上提供的解决办法是，让导入和导出的用户名一致，或者在导入时通过 EXCLUDE=TABLE_STATISTICS 选项将 table_statistics 对象过滤。
