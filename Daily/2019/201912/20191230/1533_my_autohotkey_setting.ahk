@@ -36,6 +36,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 	Send ^x ; Copy incident text to clipBoard
 	ClipWait ; Wait for clipboard to fillYou pressed
 	Send {Esc} ;
+	Run, https://mail.qq.com
 	return
 #IfWinActive
 
