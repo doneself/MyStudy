@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Vue表格简单分页</title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <body>
+	<div id="app">
+	  <table>
+		<tbody>
+		  <tr v-for="item in pageList">
+			<td>{{item.id}}</td>
+			<td>{{item.name}}</td>
+			<td>{{item.description}}</td>
+		  </tr>
+		</tbody>
+	  </table>
+	  <div>
+		<button v-on:click="prevPage">prevPage</button>
+		<button v-on:click="nextPage">nextPage</button>
+	  </div>
+	</div>
+	
+	<script>
+	 var tablelist = [
+	   { name:"lok",id:1,description:"my name is lok"},
+	   { name:"boy",id:2,description:"my name is boy"},
+	   { name:"ccc",id:3,description:"my name is ccc"},
+	   { name:"hjk",id:4,description:"my name is hjk"},
+	   { name:"alex",id:5,description:"my name is alex"},
+	   { name:"tim",id:6,description:"my name is tim"},
+	   { name:"taler",id:7,description:"my name is taler"},
+	   { name:"sex",id:8,description:"my name is sex"},
+	   { name:"hemen",id:9,description:"my name is hemen"},
+	   { name:"kkk",id:10,description:"my name is kkk"},
+	 ]
+
+	 var app = new Vue({
+	   el:"#app",
+	   data:{
+		 tablelist:tablelist,
+		 pageSize:4,
+		 currentPage:1
+	   },
+	   methods:{
+		 nextPage:function() {
+		   if((this.currentPage*this.pageSize) < this.tablelist.length) this.currentPage++;
+		 },
+		 prevPage:function() {
+		   if(this.currentPage > 1) this.currentPage--;
+		 }
+	   },
+	   computed:{
+		 pageList:function(){
+		   return this.tablelist.filter((row,index)=>{
+			 let start = (this.currentPage-1)*this.pageSize;
+			 let end = this.currentPage*this.pageSize;
+			 if(index >= start && index < end) return true;
+		   });
+		 }
+	   }
+	 })
+	</script>
+  </body>
+</html>
+
