@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+  <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>网页标题</title>
+	<meta name="keywords" content="关键字列表" />
+	<meta name="description" content="网页描述" />
+	<link rel="stylesheet" type="text/css" href="" />
+	<style type="text/css"></style>
+	　　//注意:谷歌浏览器会拦截弹框可以选择火狐浏览器打开
+	<script type="text/javascript">
+	 window.onload=init;//是将函数的地址传给了事件,而不是将函数的执行结果传给事件. 有名函数或普通函数,作为地址引用,不能带括号.
+	 function init()
+	 {
+       //更改网页背景色
+       //window.document.body.bgColor="#ffff00";
+       //变量初始化
+       var url2="";
+       var name2="win2";
+       var options2="width=400,heigth=300,left=300,top=300";
+       //打开新窗口的方法,winObj就是新窗口对象
+       var winObj=window.open(url2,name2,options2);
+       var str="<h2>张三的基本信息</h2>";
+       str+="姓名:张三";
+       str+="<br>年龄:28";
+       str+="<br>性别:男";
+       winObj.document.write(str);
+       //5秒后,新窗口自动关闭
+       winObj.setTimeout("window.close()",5000);
+	 }
+	</script>
+  </head>
+  <body>
+	<a href="http://www.baidu.com" rel="external nofollow" target="win2">百度跳转</a>
+  </body>
+</html>

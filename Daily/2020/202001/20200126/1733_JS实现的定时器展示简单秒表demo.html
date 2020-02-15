@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+  <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>1733_JS实现的定时器展示简单秒表demo</title>
+	<meta name="keywords" content="关键字列表" />
+	<meta name="description" content="网页描述" />
+	<link rel="stylesheet" type="text/css" href="" />
+	<style type="text/css"></style>
+	<script type="text/javascript">
+	 //全局变量
+	 var i=0;
+	 var timer;//外面定义全局变量
+	 function start2(){
+       //获取网页中id=result的< input>元素
+       var inputObj=document.getElementById("result");
+       //<input>标记有什么属性.那么,对应的元素对象就有什么属性.
+       inputObj.value="该程序已经运行了"+i+"秒!";
+       i++;
+       //延时器
+       //延时器想要实现重复执行,必须在函数中不断调用自己.
+       //这吗实现以后,延时器就可以模拟定时器的效果了.
+       timer=window.setTimeout("start2()",1000);//里面赋值
+	 }
+	 function stop2(){
+       window.clearTimeout(timer);
+	 }
+	</script>
+  </head>
+  <body>
+	<input id="result" type="button" value="该程序已经运行了0秒!"/><br/>
+	<input type="button" value="开始"/ onclick="start2()">
+	<input type="button" value="停止" onclick="stop2()"/>
+  </body>
+</html>
