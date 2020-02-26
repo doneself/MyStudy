@@ -1,0 +1,24 @@
+<!-- XMLHttpRequest Post Json -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+  </head>
+  <body>
+	<script>
+	 var requestURL = 'http://httpbin.org/post';
+	 var request = new XMLHttpRequest();
+	 request.open('POST', requestURL);
+	 request.responseType = 'json';
+	 request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	 request.send(JSON.stringify({ "email": "hello@user.com", "response": { "name": "Tester" } }));
+	 request.onload = function() {
+	   var superHeroes = request.response;
+	   console.log(superHeroes);
+	   /* populateHeader(superHeroes); */
+	   /* showHeroes(superHeroes); */
+	 }
+	</script>
+  </body>
+</html>
