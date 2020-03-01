@@ -1,0 +1,52 @@
+;;Insert square brackets
+
+(defun insert-square-brackets-cn-new ()
+  "insert square header list."
+  (interactive)
+  (let* (p1 p2 lineBegin lineEnd currentLine
+			(line-string (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+		   (temp-symbol-first (if (< (length line-string) 3) line-string (substring line-string 0 3))))
+    (if (region-active-p)
+	(progn (setq p1 (region-beginning))
+	       (setq p2 (region-end))
+	       (setq lineBegin (line-number-at-pos (region-beginning)))
+       	       (setq lineEnd (line-number-at-pos (region-end)))
+	       (save-excursion
+		 (goto-char p1)
+		 (setq currentLine (line-number-at-pos))
+		 (while (<= currentLine lineEnd)
+		   (move-beginning-of-line 1)
+		   (insert "[ ] ")
+		   (move-beginning-of-line 1)
+		   (forward-line 1)
+		   (setq currentLine (+ 1 currentLine))
+		   )
+		 )
+	       )
+	(progn
+	  (if (= (length temp-symbol-first) 0)
+		  (insert "[ ] ")
+		  (save-excursion
+			(cond
+			 ((string= temp-symbol-first "[ ]")
+			  (move-beginning-of-line 1)
+			  (forward-char 1)
+			  (delete-char 1)
+			  (insert "√"))
+			 ((string= temp-symbol-first "[√]")
+			  (move-beginning-of-line 1)
+			  (forward-char 1)
+			  (delete-char 1)
+			  (insert "×"))
+			 ((string= temp-symbol-first "[×]")
+			  (move-beginning-of-line 1)
+			  (forward-char 1)
+			  (delete-char 1)
+			  (insert " "))
+			 (t
+			  (move-beginning-of-line 1)
+			  (insert "[ ] ")))))
+		(message "Insert Success.")
+			)
+		))
+  )
