@@ -21,3 +21,14 @@
 		 (buffer2 (completing-read "选择buffer(2):" file-buffer-name-list nil t)))
 	(w32-shell-execute "open" kdiff-path (format " -b %s %s" (buffer-file-name (get-buffer buffer1)) (buffer-file-name (get-buffer buffer2))))
 	))
+
+
+(defun kdiff-buffers-full-filename ()
+  (interactive)
+  (let* ((kdiff-path "C:/Program Files/KDiff3/kdiff3.exe")
+		 (file-buffer-list (remove-if-not (lambda(item) (buffer-file-name item)) (buffer-list)))
+		 (file-buffer-name-list (cl-loop for bur in file-buffer-list collect (buffer-file-name bur)))
+		 (buffer1 (completing-read "选择buffer(1):" file-buffer-name-list nil t))
+		 (buffer2 (completing-read "选择buffer(2):" file-buffer-name-list nil t)))
+	(w32-shell-execute "open" kdiff-path (format " -b %s %s" buffer1 buffer2))
+	))
