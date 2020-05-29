@@ -2,6 +2,6 @@
 
 (defun select-some-thing (someone sometwo)
   (interactive
-   (list (completing-read "select one:" '("aaa" "cccc"))
+   (list (completing-read "select one:" '("aaa" "cccc") nil t)
 		 (completing-read "select two:" '("hhhhh" "jjjjj"))))
   (message (format "your select is %s and %s." someone sometwo)))
