@@ -1,0 +1,51 @@
+* 准备
+
+** 个人想法
+这个项目就是好多零碎的代码片段功能，你可以将其整合成一个项目
+
+** TODO 入门分析 [0/4]
+1. [ ] 从官方文档看起
+2. [ ] 从代码开始看起
+3. [-] 搜索一下中文教程，关鍵字
+   1. [X] ABP 教程
+   2. [ ] ABP 入门
+4. [ ] 究竟我想用它来干嘛，当然是能跑起来
+
+** TODO 资料 [0/1]
+1. [ ] [[https://www.cnblogs.com/chrlee/p/11587413.html][【ABP】从零开始学习ABP_入门介绍]] 
+
+
+* 运行下载的vue abp项目
+
+** TODO 步骤 [0/2]
+1. [ ] vs打开项目
+2. [ ] 运行失败解决办法
+
+
+** TODO 首次运行失败解决方法 [0/2]
+1. [ ] 先搜索一下错误信息
+2. [ ] 结论，vue项目的端口，跨域问题，应该将client的地址端口放到asp core的appsetting.json里面
+
+#+BEGIN_SRC shell
+Access to XMLHttpRequest at 'http://localhost:21021/AbpUserConfiguration/GetAll' from origin 'http://localhost:8085' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+#+END_SRC
+
+
+** TODO 首次运行后感受 [0/7]
+1. [ ] 下载的项目是基于vue spa的项目
+2. [ ] 前端是vue-cli的项目，后端采用asp core webapi
+3. [ ] 后端还用上了依赖注入框架，暂不熟悉那个框架
+4. [ ] 后端用了entity framework，ef的code first ，migration是特色
+5. [ ] 前端用上了typescript，因为vue的版本是3.0
+6. [ ] 如果想了解前端可以了看看vue3,不过没必要，看这个框架是为了看看asp core的后端
+7. [ ] 后端需要了解的点
+   1. [ ] 登陆验证
+
+* 官方文档阅读
+
+** TODO 准备一 [0/4]
+1. [ ] 官方仓库 [[https://github.com/aspnetboilerplate/aspnetboilerplate][link]]
+2. [ ] 官方文档 [[https://aspnetboilerplate.com/Pages/Documents][link]]
+3. [ ] 本地代码仓库 [[file+emacs:c:/NewCode/202008/aspnetboilerplate/][folder]]
+4. [ ] vue abp sample [[file+emacs:c:/NewCode/202008/5.7.0/][folder]]
+
